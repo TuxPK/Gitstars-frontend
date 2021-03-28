@@ -18,7 +18,7 @@ export default function (/* { store, ssrContext } */) {
   Router.beforeEach(async (to, from, next) => {
     const GitAuthCode = to.query.code;
 
-    await setGithubToken(GitAuthCode);
+    await getAndSetGithubToken(GitAuthCode);
 
     const isAuth = await isAuthenticated();
 
@@ -30,7 +30,7 @@ export default function (/* { store, ssrContext } */) {
   return Router;
 }
 
-async function setGithubToken(code) {
+async function getAndSetGithubToken(code) {
   if (!code) return false;
 
   const githubAuth = await axios.post('api|github-auth/token', { code })
