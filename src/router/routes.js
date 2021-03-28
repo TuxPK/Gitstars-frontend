@@ -1,19 +1,22 @@
-
 const routes = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Index.vue') }
-    ]
-  },
-
-  // Always leave this as last one,
-  // but you can also remove it
-  {
+      { name: 'home', path: 'home', component: () => import('pages/home/index.vue') },
+    ],
+    meta: { forVisitors: true },
+  }, {
+    path: '/login',
+    component: () => import('layouts/LoginLayout.vue'),
+    children: [
+      { name: 'login', path: '/', component: () => import('pages/login/index.vue') },
+    ],
+    meta: { forAuth: true },
+  }, {
     path: '*',
-    component: () => import('pages/Error404.vue')
-  }
-]
+    component: () => import('pages/Error404.vue'),
+  },
+];
 
-export default routes
+export default routes;
