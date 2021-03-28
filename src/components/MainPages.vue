@@ -1,10 +1,11 @@
 <template>
-  <div id="q-app">
+  <q-card>
     <router-view />
-  </div>
+  </q-card>
 </template>
+
 <script>
 export default {
-  name: 'App',
+  name: 'MainPages',
 };
 </script>

@@ -12,10 +12,10 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          GitStar ✨
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div>Marcos Gauderth</div>
       </q-toolbar>
     </q-header>
 
@@ -30,10 +30,10 @@
           header
           class="text-grey-8"
         >
-          Essential Links
+          Menu
         </q-item-label>
-        <EssentialLink
-          v-for="link in essentialLinks"
+        <MainMenu
+          v-for="link in menu"
           :key="link.title"
           v-bind="link"
         />
@@ -41,67 +41,31 @@
     </q-drawer>
 
     <q-page-container>
-      <router-view />
+      <MainPages />
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
-import EssentialLink from 'components/EssentialLink.vue'
+import MainMenu from 'components/MainMenu.vue';
+import MainPages from 'src/components/MainPages.vue';
 
-const linksData = [
+const menuData = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
+    title: 'Home',
+    path: '/',
+    icon: 'home',
   },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
 ];
 
 export default {
   name: 'MainLayout',
-  components: { EssentialLink },
-  data () {
+  components: { MainMenu, MainPages },
+  data() {
     return {
       leftDrawerOpen: false,
-      essentialLinks: linksData
-    }
-  }
-}
+      menu: menuData,
+    };
+  },
+};
 </script>
