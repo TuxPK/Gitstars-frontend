@@ -17,6 +17,7 @@
               icon="fab fa-github"
               size="large"
               :loading="githubValidationLoading"
+              :href="githubURL"
               @click="githubValidationLoading = true"
             >
             </q-btn>
@@ -33,6 +34,7 @@ export default {
   data() {
     return {
       githubValidationLoading: false,
+      githubURL: `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}&redirect_uri=${window.origin}/login`,
     };
   },
 };
