@@ -8,7 +8,7 @@ export default ({ Vue }) => {
       config.url = `http://localhost:3333/${urls[1]}`;
     }
     if (urls[0] === 'github') {
-      config.url = `https://github.com/${urls[1]}`;
+      config.url = `https://api.github.com/${urls[1]}`;
       config.headers.Authorization = localStorage.getItem('git_token');
     }
 

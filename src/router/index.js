@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import axios from 'axios';
 
 import routes from './routes';
 
@@ -16,11 +15,9 @@ export default function (/* { store, ssrContext } */) {
   });
 
   Router.beforeEach(async (to, from, next) => {
-    const GitAuthCode = to.query.code;
+    await Vue.auth.getAuthentication(to.query.code);
 
-    await getAndSetGithubToken(GitAuthCode);
-
-    const isAuth = await isAuthenticated();
+    const isAuth = isAuthenticated();
 
     const path = getToPath(to, isAuth);
 
@@ -30,21 +27,7 @@ export default function (/* { store, ssrContext } */) {
   return Router;
 }
 
-async function getAndSetGithubToken(code) {
-  if (!code) return false;
-
-  const githubAuth = await axios.post('api|github-auth/token', { code })
-    .then()
-    .catch(() => false);
-
-  if (!githubAuth) return false;
-
-  const { token, type } = githubAuth.data;
-
-  return localStorage.setItem('git_token', `${type} ${token}`);
-}
-
-async function isAuthenticated() {
+function isAuthenticated() {
   return !!localStorage.getItem('git_token');
 }
 

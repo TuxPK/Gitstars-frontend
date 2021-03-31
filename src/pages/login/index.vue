@@ -17,7 +17,7 @@
               icon="fab fa-github"
               size="large"
               :loading="githubValidationLoading"
-              :href="githubURL"
+              :href="githubValidationURL"
               @click="githubValidationLoading = true"
             >
             </q-btn>
@@ -29,12 +29,15 @@
 </template>
 
 <script>
+const githubUrl = 'https://github.com/login/oauth/authorize?';
+const clientId = process.env.GITHUB_CLIENT_ID;
+
 export default {
   name: 'Login',
   data() {
     return {
       githubValidationLoading: false,
-      githubURL: `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}&redirect_uri=${window.origin}/login`,
+      githubValidationURL: `${githubUrl}client_id=${clientId}&redirect_uri=${window.origin}/login`,
     };
   },
 };

@@ -22,6 +22,7 @@ module.exports = function (/* ctx */) {
     // --> boot files are part of "main.js"
     // https://v1.quasar.dev/quasar-cli/boot-files
     boot: [
+      'auth',
       'axios',
     ],
 
@@ -47,6 +48,11 @@ module.exports = function (/* ctx */) {
     // Full list of options: https://v1.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
       vueRouterMode: 'history', // available values: 'hash', 'history'
+
+      env: {
+        GITHUB_CLIENT_ID: '6e05b29a78396aea14db',
+        GITHUB_CLIENT_SECRET: '2ac13c83e2e20d94611edb566a91dbbe8efaafeb',
+      },
 
       // transpile: false,
 
