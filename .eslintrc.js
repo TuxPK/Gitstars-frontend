@@ -63,6 +63,8 @@ module.exports = {
     'prefer-promise-reject-errors': 'off',
     'no-use-before-define': 'off',
     'func-names': 'off',
+    'camelcase': 'off',
+    'consistent-return': 'off',
 
 
     // allow debugger during development only
