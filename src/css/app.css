@@ -1,1 +1,19 @@
 /* app global css */
+
+.header {
+  padding: 6px;
+}
+
+.text-maindark {
+  color: #24292e;
+}
+.bg-maindark {
+  background: #24292e;
+}
+
+.text-darkblue {
+  color: #35495E;
+}
+.bg-darkblue {
+  background: #35495E;
+}
