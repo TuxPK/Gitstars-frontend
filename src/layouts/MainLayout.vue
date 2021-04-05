@@ -1,45 +1,43 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+    <q-header elevated class="header bg-maindark">
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
-        />
-
         <q-toolbar-title>
           GitStar ✨
         </q-toolbar-title>
 
-        <div>Marcos Gauderth</div>
+        <div class="q-mr-lg">
+          {{ user.login }}
+          <q-avatar
+            size="md"
+            class="q-ml-md"
+            v-if="user.avatar_url"
+            :title="'@'+user.avatar_url"
+          >
+            <img :src="user.avatar_url">
+          </q-avatar>
+          <q-avatar
+            v-else
+            size="md"
+            class="q-mr-sm"
+            color="grey-4"
+            text-color="white"
+            icon="fas fa-user"
+          />
+        </div>
+
+        <q-btn
+          flat
+          rounded
+          dense
+          icon="fas fa-sign-out-alt"
+          label="Sair"
+          @click.native="logout"
+        >
+
+        </q-btn>
       </q-toolbar>
     </q-header>
-
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-      content-class="bg-grey-1"
-    >
-      <q-list>
-        <q-item-label
-          header
-          class="text-grey-8"
-        >
-          Menu
-        </q-item-label>
-        <MainMenu
-          v-for="link in menu"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer>
-
     <q-page-container>
       <MainPages />
     </q-page-container>
@@ -47,7 +45,6 @@
 </template>
 
 <script>
-import MainMenu from 'components/MainMenu.vue';
 import MainPages from 'src/components/MainPages.vue';
 
 const menuData = [
@@ -60,12 +57,30 @@ const menuData = [
 
 export default {
   name: 'MainLayout',
-  components: { MainMenu, MainPages },
+  components: { MainPages },
   data() {
     return {
       leftDrawerOpen: false,
       menu: menuData,
     };
+  },
+  mounted() {
+    this.getUser();
+  },
+  methods: {
+    async getUser() {
+      if (!this.user.login && !this.$store.state.users.loading_users) {
+        await this.$store.dispatch('users/get');
+      }
+    },
+    logout() {
+      this.auth.logout();
+    },
+  },
+  computed: {
+    user() {
+      return this.$store.state.users.user;
+    },
   },
 };
 </script>
