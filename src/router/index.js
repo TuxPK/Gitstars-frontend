@@ -5,7 +5,7 @@ import routes from './routes';
 
 Vue.use(VueRouter);
 
-export default function (/* { store, ssrContext } */) {
+export default function () {
   const Router = new VueRouter({
     scrollBehavior: () => ({ x: 0, y: 0 }),
     routes,
@@ -15,9 +15,11 @@ export default function (/* { store, ssrContext } */) {
   });
 
   Router.beforeEach(async (to, from, next) => {
-    await Vue.auth.getAuthentication(to.query.code);
+    const { code } = to.query;
 
-    const isAuth = isAuthenticated();
+    if (code) await Vue.auth.login(code);
+
+    const isAuth = Vue.auth.isAuthenticated();
 
     const path = getToPath(to, isAuth);
 
@@ -25,10 +27,6 @@ export default function (/* { store, ssrContext } */) {
   });
 
   return Router;
-}
-
-function isAuthenticated() {
-  return !!localStorage.getItem('git_token');
 }
 
 function getToPath(to, isAuth) {

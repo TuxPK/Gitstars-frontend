@@ -1,34 +1,43 @@
 import axios from 'axios';
 
-export default function ({ store, Vue }) {
+export default function ({ router, Vue }) {
   Vue.auth = {
-    async getAuthentication(code) {
-      if (!code) return false;
-      const githubCode = code;
-
-      const githubAuth = await getGithubToken(githubCode);
-      setGithubToken(githubAuth);
-
-      await store.dispatch();
+    async login(code) {
+      await axios.get(`api|session/login/${code}`)
+        .then((response) => setGithubToken(response))
+        .then((response) => setApiToken(response))
+        .then(() => Vue.messages.success('Seja bem vindo :)'))
+        .catch(() => Vue.messages.error('Ops, tivemos algum problema, aguarde alguns minutos e tente mais tarde'));
+    },
+    async logout() {
+      clearToken();
+      return router.go('home');
+    },
+    isAuthenticated() {
+      return localStorage.getItem('git_token') && localStorage.getItem('api_token');
     },
   };
 
   Vue.prototype.auth = Vue.auth;
 }
 
-async function getGithubToken(code) {
-  if (!code) return false;
+function setGithubToken(response) {
+  const { github_token } = response.data;
 
-  const githubAuth = await axios.post('api|github-auth/token', { code })
-    .catch(() => false);
+  localStorage.setItem('git_token', github_token);
 
-  return githubAuth;
+  return response;
 }
 
-function setGithubToken(githubAuth) {
-  if (!githubAuth) return false;
+function setApiToken(response) {
+  const { api_token } = response.data;
 
-  const { token, type } = githubAuth.data;
+  localStorage.setItem('api_token', api_token);
 
-  return localStorage.setItem('git_token', `${type} ${token}`);
+  return response;
+}
+
+function clearToken() {
+  localStorage.removeItem('git_token');
+  localStorage.removeItem('api_token');
 }
