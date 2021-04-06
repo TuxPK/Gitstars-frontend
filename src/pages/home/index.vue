@@ -106,6 +106,7 @@
                 clearable
                 label="Add tag"
                 color="green"
+                maxLength="30"
               >
                 <template v-slot:after>
                   <q-btn
@@ -116,6 +117,7 @@
                     text-color="white"
                     icon="fas fa-plus"
                     @click="!tag.uuid ? addTag() : updateTag()"
+                    :disable="!tag.name"
                   />
                 </template>
               </q-input>

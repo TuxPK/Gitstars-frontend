@@ -31,6 +31,7 @@
               :loading="githubValidationLoading"
               :href="getGithubValidationURL()"
               @click="githubValidationLoading = true"
+              :disable="!githubLogin"
             >
             </q-btn>
           </div>
