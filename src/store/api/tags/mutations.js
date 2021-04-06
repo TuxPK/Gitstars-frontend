@@ -21,7 +21,6 @@ export function creatingTags() {
 }
 
 export function edit(state, tag) {
-  console.log(tag);
   this.state.tags.tags.splice(_.findIndex(this.state.tags.tags, { uuid: tag.uuid }), 1, tag);
 
   this.state.tags.updating_tags = false;
