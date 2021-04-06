@@ -106,7 +106,7 @@
                 clearable
                 label="Add tag"
                 color="green"
-                maxLength="30"
+                maxlength="20"
               >
                 <template v-slot:after>
                   <q-btn
@@ -247,7 +247,7 @@ export default {
     },
     repositories() {
       return this.$store.state.repositories.repositories
-        .filter((repository) => (this.tags
+        .filter((repository) => !this.filterTag || (this.tags
           .filter((tag) => tag.name.toLowerCase()
             .includes(this.filterTag.toLowerCase()))
           .map((tag) => tag.repository_id))

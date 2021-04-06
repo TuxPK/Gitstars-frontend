@@ -17,11 +17,11 @@ export async function getAll() {
 }
 
 export function create(state, tag) {
-  const { name, repository_uuid } = tag;
+  const { name, repository_id } = tag;
   this.commit('tags/creatingTags');
 
   const url = 'api|tag';
-  const body = { name, repository_uuid };
+  const body = { name, repository_id };
 
   axios.post(url, body)
     .then((response) => {
@@ -35,11 +35,11 @@ export function create(state, tag) {
 }
 
 export async function update(state, tag) {
-  const { uuid, name, repository_uuid } = tag;
+  const { uuid, name, repository_id } = tag;
   this.commit('tags/creatingTags');
 
   const url = `api|tag/${tag.uuid}`;
-  const body = { uuid, name, repository_uuid };
+  const body = { uuid, name, repository_id };
 
   await axios.put(url, body)
     .then(() => {
