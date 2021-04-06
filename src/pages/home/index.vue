@@ -57,27 +57,29 @@
               </div>
             </div>
           </q-card-section>
-          <q-card-actions>
-            <q-btn
-              dense
-              flat
-              label="Adicionar Tag"
-              class="q-ml-md q-pa-sm bg-blue"
-              color="white"
-              icon="fas fa-plus"
-              :loading="tags.creating_tags || tags.updating_tags"
-              @click="showTagField(repository.id)"
-            />
-          </q-card-actions>
           <q-card-section>
             <div class="row">
-              <q-chip
-                square
-                v-for="tag of getRepositoryTags(repository.id)"
-                :key="tag.uuid"
-              >
-                {{ tag.name }}
-              </q-chip>
+              <div class="col-md col-sm-12 q-mt-md">
+                <q-chip
+                  square
+                  v-for="tag of getRepositoryTags(repository.id)"
+                  :key="tag.uuid"
+                >
+                  {{ tag.name }}
+                </q-chip>
+              </div>
+              <div class="col-md-auto col-sm-12 q-mt-md">
+                <q-btn
+                  dense
+                  flat
+                  label="Adicionar Tag"
+                  class="q-ml-md q-pa-sm bg-primary"
+                  color="white"
+                  icon="fas fa-plus"
+                  :loading="tags.creating_tags || tags.updating_tags"
+                  @click="showTagField(repository.id)"
+                />
+              </div>
             </div>
           </q-card-section>
         </q-card>
@@ -158,6 +160,15 @@
                 </q-card-section>
               </q-scroll-area>
             </q-card>
+            <div class="row flex flex-center">
+              <q-btn
+                class="bg-darkblue"
+                flat
+                label="Fechar"
+                text-color="white"
+                v-close-popup
+              />
+            </div>
           </div>
         </q-card-section>
       </q-card>
