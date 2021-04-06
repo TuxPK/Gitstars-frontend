@@ -5,7 +5,7 @@ export default ({ Vue }) => {
     const urls = config.url.split('|');
 
     if (urls[0] === 'api') {
-      config.url = process.env.API_URL || `http://localhost:3333/${urls[1]}`;
+      config.url = process.env.API_URL + urls[1];
       config.headers.api_token = localStorage.getItem('api_token');
     }
     if (urls[0] === 'github') {
