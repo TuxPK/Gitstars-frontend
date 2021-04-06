@@ -2,7 +2,7 @@
 
 Application to view starred projects and be able to search for tags that can be created and edited. All user starred repositories came from github API and only the tags will be saved in database with repository id to search and tag.
 
-You can access the application page by [Gitstars]()
+You can access the application page by [Gitstars](https://gitstar-five.vercel.app/#/login)
 
 ![Record](./screenshots/tag-search.gif)
 
