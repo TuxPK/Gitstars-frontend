@@ -51,6 +51,7 @@ module.exports = function (/* ctx */) {
       vueRouterMode: 'history', // available values: 'hash', 'history'
 
       env: {
+        API_URL: 'https://api-gitstar.herokuapp.com/',
         GITHUB_CLIENT_ID: 'ecea2bfca6f7baf213a9',
         GITHUB_CLIENT_SECRET: '6e18b777eb0f49ea5ddd7b140913fe336e76be22',
       },
