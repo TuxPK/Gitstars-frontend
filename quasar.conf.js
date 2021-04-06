@@ -50,11 +50,6 @@ module.exports = function (/* ctx */) {
     build: {
       vueRouterMode: 'history', // available values: 'hash', 'history'
 
-      env: {
-        GITHUB_CLIENT_ID: '6e05b29a78396aea14db',
-        GITHUB_CLIENT_SECRET: '2ac13c83e2e20d94611edb566a91dbbe8efaafeb',
-      },
-
       // transpile: false,
 
       // Add dependencies for transpiling with Babel (Array of string/regex)
